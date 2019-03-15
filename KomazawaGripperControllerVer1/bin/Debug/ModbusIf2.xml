@@ -1,0 +1,255 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ModbusIf2</name>
+    </assembly>
+    <members>
+        <member name="T:ModbusIf2.CModbusIf">
+            <summary>
+            <para>Modbusプロトコルで通信を行う抽象基底クラス</para>
+            <para>ASCIIモードとRTUモードに対応した子クラスをこのクラスから派生させる。</para>
+            </summary>
+            <remarks>
+            <para>Copyright (C) 2017 MinebeaMitsumi Inc. All Rights Reserved.</para>
+            <para>version:1.0 date:2017/6/27 parson:f.yamada 初版</para>
+            <para>version:1.1 date:2017/7/31 parson:f.yamada RTUモードの送信時にCRCコードのバイト並びが上位/下位逆だった不具合を修正</para>
+            </remarks>
+        </member>
+        <member name="F:ModbusIf2.CModbusIf.serialPort">
+            <summary>
+            シリアル通信ポート
+            </summary>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.Open(System.String,System.Int32,System.IO.Ports.Parity,System.Int32,System.IO.Ports.StopBits)">
+            <summary>
+            通信ポートのオープン処理
+            </summary>
+            <remarks>
+            serialPortオブジェクトを作成しTimeout時間を設定してOpen処理を行う。
+            </remarks>
+            <param name="portName">COMポートの名称　例）"COM7"</param>
+            <param name="baudRate">通信速度　例）9600</param>
+            <param name="parity">パリティビット</param>
+            <param name="dlen">データ長</param>
+            <param name="stop">ストップビット</param>
+            <returns>成功した場合はE_OKを返す。それ以外はエラーコードを返す。</returns>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.Close">
+            <summary>
+            通信ポートのクローズ処理
+            </summary>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.isOpen">
+            <summary>
+            通信ポートのオープン判定
+            </summary>
+            <returns>オープンしている場合にtrueを返す。</returns>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.ReadHoldingRegister(System.Byte,System.UInt16,System.UInt16,System.UInt16[])">
+            <summary>
+            ワードデータの読み出し処理
+            </summary>
+            <remarks>
+            指定のアドレスから指定の長さのワードデータを読み出す。
+            </remarks>
+            <param name="NodeAddress">読み出し対象の機器のノードアドレス</param>
+            <param name="DataAddress">読み出すデータの開始アドレス</param>
+            <param name="WordCount">読み出すデータの長さ</param>
+            <param name="ReadData">読み出したワードデータを格納するバッファ</param>
+            <returns>成功した場合はE_OKを返す。それ以外はエラーコードを返す。</returns>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.PresetSingleRegister(System.Byte,System.UInt16,System.UInt16)">
+            <summary>
+            1ワードデータの書込み処理
+            </summary>
+            <remarks>
+            指定のアドレスに1ワードデータを書込む。
+            </remarks>
+            <param name="NodeAddress">書込み対象の機器のノードアドレス</param>
+            <param name="DataAddress">書込むデータの開始アドレス</param>
+            <param name="WriteData">書込むワードデータ</param>
+            <returns>成功した場合はE_OKを返す。それ以外はエラーコードを返す。</returns>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.PresetMultipleRegisters(System.Byte,System.UInt16,System.UInt16,System.UInt16[])">
+            <summary>
+            複数ワードデータの書込み処理
+            </summary>
+            <remarks>
+            指定のアドレスに指定の長さのワードデータを書込む。
+            </remarks>
+            <param name="NodeAddress">書込み対象の機器のノードアドレス</param>
+            <param name="DataAddress">書込むデータの開始アドレス</param>
+            <param name="WordCount">書込むデータの長さ</param>
+            <param name="WriteData">書込むワードデータが格納されているバッファ</param>
+            <returns>成功した場合はE_OKを返す。それ以外はエラーコードを返す。</returns>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.ReadLongData(System.Byte,System.UInt16,System.Int32@)">
+            <summary>
+            ロングデータ（Int32）の読み出し処理
+            </summary>
+            <remarks>
+            指定のアドレスから2ワードデータを読み出しロングデータにして返す。
+            </remarks>
+            <param name="NodeAddress">読み出し対象の機器のノードアドレス</param>
+            <param name="DataAddress">読み出すデータの開始アドレス</param>
+            <param name="ReadData">読み出したロングデータを格納するバッファ</param>
+            <returns>成功した場合はE_OKを返す。それ以外はエラーコードを返す。</returns>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.WriteLongData(System.Byte,System.UInt16,System.Int32)">
+            <summary>
+            ロングデータ（Int32）の書込み処理
+            </summary>
+            <remarks>
+            ロングデータを2ワードデータに展開し指定のアドレスに書込む。
+            </remarks>
+            <param name="NodeAddress">書込み対象の機器のノードアドレス</param>
+            <param name="DataAddress">書込むデータの開始アドレス</param>
+            <param name="WriteData">書込むワードデータ</param>
+            <returns>成功した場合はE_OKを返す。それ以外はエラーコードを返す。</returns>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.SendMessage(System.Byte,System.Byte,System.Byte,System.Byte[])">
+            <summary>
+            Modbusプロトコルのメッセージ送信処理
+            </summary>
+            <remarks>
+            抽象関数の宣言で、実装は子クラスで行う。
+            </remarks>
+            <param name="NodeAddress">メッセージ・フレームのノードアドレス</param>
+            <param name="function">メッセージ・フレームのファンクション・コード</param>
+            <param name="DataLength">送信するワードデータ長</param>
+            <param name="SendData">送信するワードデータ</param>
+            <returns>成功した場合はE_OKを返す。それ以外はエラーコードを返す。</returns>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.ReceiveResponse(System.Byte@,System.Byte@,System.Byte@,System.Byte[])">
+            <summary>
+            Modbusプロトコルのメッセージ受信処理
+            </summary>
+            <remarks>
+            抽象関数の宣言で、実装は子クラスで行う。
+            </remarks>
+            <param name="NodeAddress">受信したメッセージ・フレームのノードアドレス</param>
+            <param name="function">受信したメッセージ・フレームのファンクション・コード</param>
+            <param name="DataLength">受信したデータのバイト長</param>
+            <param name="ReceiveData">受信したバイトデータの格納バッファ</param>
+            <returns>成功した場合はE_OKを返す。それ以外はエラーコードを返す。</returns>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.SendString(System.String)">
+            <summary>
+            文字列送信処理（プロトコル無し）
+            </summary>
+            <remarks>
+            パラメータstrで渡された文字列をシリアルポートに出力する。
+            </remarks>
+            <param name="str">送信する文字列</param>
+            <returns>成功した場合はE_OKを返す。それ以外はエラーコードを返す。</returns>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.ReceiveBytes(System.Byte[],System.Int32@)">
+            <summary>
+            バイトデータ受信処理（プロトコル無し）
+            </summary>
+            <remarks>
+            シリアルポートの受信タイムアウトが発生するまでバイトデータを受信する。
+            </remarks>
+            <param name="rdata">受信したバイトデータの格納バッファ</param>
+            <param name="len">[IN]受信するデータのMAXバイト長。[OUT]受信したデータのバイト長</param>
+            <returns>成功した場合はE_OKを返す。それ以外はエラーコードを返す。</returns>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.ConvValueType(System.UInt16[])">
+            <summary>
+            データの型変換。UInt16[0],[1]→Int32
+            </summary>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.ConvValueType(System.UInt16)">
+            <summary>
+            データの型変換。UInt16→Int16
+            </summary>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.ConvValueType(System.Int32,System.UInt16[])">
+            <summary>
+            データの型変換。Int32→UInt16[0],[1]
+            </summary>
+        </member>
+        <member name="M:ModbusIf2.CModbusIf.ConvValueType(System.Int16)">
+            <summary>
+            データの型変換。Int16→UInt16
+            </summary>
+        </member>
+        <member name="T:ModbusIf2.CModbusIfAscii">
+            <summary>
+            ModbusプロトコルのASCIIモードに対応した子クラス
+            </summary>
+            <remarks>
+            ASCIIモードでの送受信処理を実装する。
+            </remarks>
+        </member>
+        <member name="M:ModbusIf2.CModbusIfAscii.SendMessage(System.Byte,System.Byte,System.Byte,System.Byte[])">
+            <summary>
+            Modbusプロトコル（ASCIIモード）のメッセージ送信処理
+            </summary>
+            <remarks>
+            ASCIIモードでの送信メッセージ・フレームを作成しシリアルポートに出力する。
+            </remarks>
+            <param name="NodeAddress">メッセージ・フレームのノードアドレス</param>
+            <param name="function">メッセージ・フレームのファンクション・コード</param>
+            <param name="DataLength">送信するワードデータ長</param>
+            <param name="SendData">送信するワードデータ</param>
+            <returns>成功した場合はE_OKを返す。それ以外はエラーコードを返す。</returns>
+        </member>
+        <member name="M:ModbusIf2.CModbusIfAscii.ReceiveResponse(System.Byte@,System.Byte@,System.Byte@,System.Byte[])">
+            <summary>
+            Modbusプロトコル（ASCIIモード）のメッセージ受信処理
+            </summary>
+            <remarks>
+            ASCIIモードのModbusプロトコルに従ってレスポンスのメッセージ・フレームを受信する。
+            受信したデータはバイナリデータに変換し受信バッファに格納する。
+            </remarks>
+            <param name="NodeAddress">受信したメッセージ・フレームのノードアドレス</param>
+            <param name="function">受信したメッセージ・フレームのファンクション・コード</param>
+            <param name="DataLength">受信したデータのバイト長</param>
+            <param name="ReceiveData">受信したバイトデータの格納バッファ</param>
+            <returns>成功した場合はE_OKを返す。それ以外はエラーコードを返す。</returns>
+        </member>
+        <member name="T:ModbusIf2.CModbusIfRtu">
+            <summary>
+            ModbusプロトコルのRTUモードに対応した子クラス
+            </summary>
+            <remarks>
+            RTUモードでの送受信処理を実装する。
+            </remarks>
+        </member>
+        <member name="M:ModbusIf2.CModbusIfRtu.SendMessage(System.Byte,System.Byte,System.Byte,System.Byte[])">
+            <summary>
+            Modbusプロトコル（RTUモード）のメッセージ送信処理
+            </summary>
+            <remarks>
+            RTUモードでの送信メッセージ・フレームを作成しシリアルポートに出力する。
+            </remarks>
+            <param name="NodeAddress">メッセージ・フレームのノードアドレス</param>
+            <param name="function">メッセージ・フレームのファンクション・コード</param>
+            <param name="DataLength">送信するワードデータ長</param>
+            <param name="SendData">送信するワードデータ</param>
+            <returns>成功した場合はE_OKを返す。それ以外はエラーコードを返す。</returns>
+        </member>
+        <member name="M:ModbusIf2.CModbusIfRtu.ReceiveResponse(System.Byte@,System.Byte@,System.Byte@,System.Byte[])">
+            <summary>
+            Modbusプロトコル（RTUモード）のメッセージ受信処理
+            </summary>
+            <remarks>
+            RTUモードのModbusプロトコルに従ってレスポンスのメッセージ・フレームを受信する。
+            </remarks>
+            <param name="NodeAddress">[IN]通信対象のノードアドレス</param>
+            <param name="function">受信したメッセージ・フレームのファンクション・コード</param>
+            <param name="DataLength">受信したデータのバイト長</param>
+            <param name="ReceiveData">受信したバイトデータの格納バッファ</param>
+            <returns>成功した場合はE_OKを返す。それ以外はエラーコードを返す。</returns>
+        </member>
+        <member name="M:ModbusIf2.CModbusIfRtu.CalcCRC(System.Byte[],System.Int32)">
+            <summary>
+            RTUモードでのCRC計算ルーチン
+            </summary>
+            <param name="data">計算対象のデータバッファ</param>
+            <param name="len">計算対象のデータ長</param>
+            <returns>計算結果のCRCデータ</returns>
+        </member>
+    </members>
+</doc>
