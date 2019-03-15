@@ -1,0 +1,13 @@
+c:\users\mg114980\source\repos\KomazawaGripperControllerVer1\KomazawaGripperControllerVer1\bin\Debug\KomazawaGripperControllerVer1.exe.config
+c:\users\mg114980\source\repos\KomazawaGripperControllerVer1\KomazawaGripperControllerVer1\bin\Debug\KomazawaGripperControllerVer1.exe
+c:\users\mg114980\source\repos\KomazawaGripperControllerVer1\KomazawaGripperControllerVer1\bin\Debug\KomazawaGripperControllerVer1.pdb
+c:\users\mg114980\source\repos\KomazawaGripperControllerVer1\KomazawaGripperControllerVer1\bin\Debug\ModbusIf2.dll
+c:\users\mg114980\source\repos\KomazawaGripperControllerVer1\KomazawaGripperControllerVer1\bin\Debug\ModbusIf2.pdb
+c:\users\mg114980\source\repos\KomazawaGripperControllerVer1\KomazawaGripperControllerVer1\bin\Debug\ModbusIf2.xml
+c:\users\mg114980\source\repos\KomazawaGripperControllerVer1\KomazawaGripperControllerVer1\obj\Debug\KomazawaGripperControllerVer1.csprojResolveAssemblyReference.cache
+c:\users\mg114980\source\repos\KomazawaGripperControllerVer1\KomazawaGripperControllerVer1\obj\Debug\KomazawaGripperControllerVer1.Form1.resources
+c:\users\mg114980\source\repos\KomazawaGripperControllerVer1\KomazawaGripperControllerVer1\obj\Debug\KomazawaGripperControllerVer1.Properties.Resources.resources
+c:\users\mg114980\source\repos\KomazawaGripperControllerVer1\KomazawaGripperControllerVer1\obj\Debug\KomazawaGripperControllerVer1.csproj.GenerateResource.Cache
+c:\users\mg114980\source\repos\KomazawaGripperControllerVer1\KomazawaGripperControllerVer1\obj\Debug\KomazawaGripperControllerVer1.csproj.CoreCompileInputs.cache
+c:\users\mg114980\source\repos\KomazawaGripperControllerVer1\KomazawaGripperControllerVer1\obj\Debug\KomazawaGripperControllerVer1.exe
+c:\users\mg114980\source\repos\KomazawaGripperControllerVer1\KomazawaGripperControllerVer1\obj\Debug\KomazawaGripperControllerVer1.pdb
